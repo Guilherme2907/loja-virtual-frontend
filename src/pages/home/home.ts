@@ -43,7 +43,7 @@ export class HomePage {
     error => {});
   } 
 
-  signUP(){
-    this.navCtrl.push('SignUpPage');
+  signup(){
+    this.navCtrl.push('SignupPage');
   }
 }
