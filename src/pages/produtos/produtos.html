@@ -13,7 +13,7 @@
   <ion-list>
     <button ion-item *ngFor="let produto of produtos">
       <ion-thumbnail item-start>
-        <img src="assets/imgs/prod.jpg">
+        <img src="assets/imgs/prod{{produto.id}}.jpg">
       </ion-thumbnail>
       <h2>{{produto.nome}}</h2>
       <p>{{produto.preco | currency}}</p>
