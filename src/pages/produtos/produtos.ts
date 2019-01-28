@@ -17,13 +17,13 @@ export class ProdutosPage {
 
   ionViewDidLoad() {
     let categoriaId = this.navParams.get('categoriaId');
-    this.produtoService.findAllByCategorias(categoriaId).subscribe(response => {
+    this.produtoService.findByCategorias(categoriaId).subscribe(response => {
       this.produtos = response['content'];
     },
     error => {});
   }
 
-  showDetail(){
-    this.navCtrl.push('ProdutoDetailPage');
+  showDetail(produtoId: string){
+    this.navCtrl.push('ProdutoDetailPage',{produtoId : produtoId});
   }
 }
