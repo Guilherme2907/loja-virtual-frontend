@@ -10,6 +10,11 @@
 
 
 <ion-content padding>
+  <ion-fab slot="fixed" right edge>   
+    <button navPush="CartPage" ion-fab mini>
+      <ion-icon name="cart"></ion-icon>
+    </button> 
+  </ion-fab> 
   <ion-list>
     <button ion-item *ngFor="let produto of produtos" (click)="showDetail(produto.id)">
       <ion-thumbnail item-start>
