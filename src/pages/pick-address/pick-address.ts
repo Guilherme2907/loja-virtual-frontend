@@ -1,28 +1,31 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { EnderecoDTO } from '../../models/endereco.dto';
 import { StorageService } from '../../services/storage.service';
-import { ClienteDTO } from '../../models/cliente.dto';
 import { ClienteService } from '../../services/domain/cliente.service';
 
 
 @IonicPage()
 @Component({
-  selector: 'page-profile',
-  templateUrl: 'profile.html',
+  selector: 'page-pick-address',
+  templateUrl: 'pick-address.html',
 })
-export class ProfilePage {
+export class PickAddressPage {
 
-  cliente: ClienteDTO;
+  enderecos: EnderecoDTO[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public storage: StorageService,
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams,
+    public storage: StorageService,
     public clienteService: ClienteService) {
   }
+
 
   ionViewDidLoad() {
     let user = this.storage.getLocalUser();
     if(user && user.email){
       this.clienteService.findByEmail(user.email).subscribe(response => {
-        this.cliente = response as ClienteDTO;
+        this.enderecos = response['enderecos'];
       },
       error => {
         if(error.status == 403){
