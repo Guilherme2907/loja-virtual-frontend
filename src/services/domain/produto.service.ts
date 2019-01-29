@@ -12,8 +12,8 @@ export class ProdutoService{
 
     }
 
-    findByCategorias(categoriaId: string) : Observable<ProdutoDTO []> {
-        return this.http.get<ProdutoDTO []>(`${API_CONFIG.baseUrl}/produtos/?categorias=${categoriaId}`);
+    findByCategorias(categoriaId: string,page: number,elementsPerPage: number) : Observable<ProdutoDTO []> {
+        return this.http.get<ProdutoDTO []>(`${API_CONFIG.baseUrl}/produtos/?categorias=${categoriaId}&page=${page}&elementsPerPage=${elementsPerPage}`);
     }
 
     findById(produtoId: string){
