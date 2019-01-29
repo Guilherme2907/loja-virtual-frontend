@@ -20,6 +20,7 @@ export class OrderConfirmationPage {
   cliente: ClienteDTO;
   endereco: EnderecoDTO;
   cartItems: CartItem[];
+  codPedido: string;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -27,7 +28,6 @@ export class OrderConfirmationPage {
     public cartService: CartService,
     public pedidoService: PedidoService) {
     this.pedido = this.navParams.get('pedido');
-
   }
 
   ionViewDidLoad() {
@@ -50,7 +50,7 @@ export class OrderConfirmationPage {
   checkout(){
     this.pedidoService.insert(this.pedido).subscribe(response => {
       this.cartService.createOrClearCart();
-      console.log(response.headers.get('location'))
+      this.codPedido = this.findCodPedido(response.headers.get('location'));
     },
     error => {
       if(error.status == 403){
@@ -59,8 +59,17 @@ export class OrderConfirmationPage {
     })
   }
 
+  private findCodPedido(location: string) {
+    let position = location.lastIndexOf('/');
+    return location.substring(position + 1,location.length);
+  }
+
   back(){
     this.navCtrl.setRoot('CartPage');
+  }
+
+  home(){
+    this.navCtrl.setRoot('CategoriasPage');
   }
 
 }
